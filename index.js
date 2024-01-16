@@ -1,16 +1,27 @@
-const header = document.getElementById("header");
 
-// sub-heading code
-const h3 = document.createElement("h3");
-h3.innerText="Buy high quality organic fruits online";
-h3.style.fontStyle="italic";
-header.appendChild(h3);
+document.getElementsByTagName("form")[0].addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const fruit = document.getElementById("fruit-to-add").value;
+    const li = document.createElement("li");
+    li.innerHTML=fruit+'<button class="delete-btn btn-delete">x</button><button class="edit-btn">Edit</button>';
+    li.classList.add("fruit");
+    document.getElementsByClassName("fruits")[0].appendChild(li);
 
-// paragraph code inside 2nd div
+    // here I am adding event listener on this newly created list item
 
-const p = document.createElement("p");
-p.setAttribute("id", "fruits-total");
-p.innerText="Total fruits: 4";
+    const btnDelete = document.getElementsByClassName("btn-delete");
 
-const second_div = document.getElementsByTagName("div")[1];
-second_div.appendChild(p);
+    Array.from(btnDelete).forEach((btn)=>{
+    btn.addEventListener("click", (e)=>{
+        e.target.parentElement.remove();
+    });
+});
+});
+
+const btnDelete = document.getElementsByClassName("delete-btn");
+
+Array.from(btnDelete).forEach((btn)=>{
+    btn.addEventListener("click", (e)=>{
+        e.target.parentElement.remove();
+    });
+});
