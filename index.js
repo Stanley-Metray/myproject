@@ -1,10 +1,16 @@
-const bs_head=document.querySelector("#basket-heading");
+const header = document.getElementById("header");
 
-bs_head.style.color = "brown";
+// sub-heading code
+const h3 = document.createElement("h3");
+h3.innerText="Buy high quality organic fruits online";
+h3.style.fontStyle="italic";
+header.appendChild(h3);
 
-const even_childs = document.querySelectorAll("li:nth-child(2n)");
+// paragraph code inside 2nd div
 
-Array.from(even_childs).forEach((element)=>{
-    element.style.backgroundColor="red";
-    element.style.color="white";
-});
+const p = document.createElement("p");
+p.setAttribute("id", "fruits-total");
+p.innerText="Total fruits: 4";
+
+const second_div = document.getElementsByTagName("div")[1];
+second_div.appendChild(p);
