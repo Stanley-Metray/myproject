@@ -1,27 +1,29 @@
+class user_details {
+    constructor(username, email, phone) {
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+    }
+}
 
-document.getElementsByTagName("form")[0].addEventListener("submit", (e)=>{
-    e.preventDefault();
-    const fruit = document.getElementById("fruit-to-add").value;
-    const li = document.createElement("li");
-    li.innerHTML=fruit+'<button class="delete-btn btn-delete">x</button><button class="edit-btn">Edit</button>';
-    li.classList.add("fruit");
-    document.getElementsByClassName("fruits")[0].appendChild(li);
+function handleFormSubmit(event){
+    event.preventDefault();
+    
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
 
-    // here I am adding event listener on this newly created list item
+    const user = new user_details(username, email, phone);
+    const users = JSON.parse(localStorage.getItem("User Details")) || [];
+    users.push(user);
 
-    const btnDelete = document.getElementsByClassName("btn-delete");
-
-    Array.from(btnDelete).forEach((btn)=>{
-    btn.addEventListener("click", (e)=>{
-        e.target.parentElement.remove();
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+    users.forEach((value)=>{
+        const li = document.createElement("li");
+        li.innerText = value.username+" - "+value.email+" - "+value.phone;
+        list.appendChild(li);
     });
-});
-});
 
-const btnDelete = document.getElementsByClassName("delete-btn");
-
-Array.from(btnDelete).forEach((btn)=>{
-    btn.addEventListener("click", (e)=>{
-        e.target.parentElement.remove();
-    });
-});
+    localStorage.setItem("User Details", JSON.stringify(users));
+}
