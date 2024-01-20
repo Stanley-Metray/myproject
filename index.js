@@ -1,23 +1,33 @@
-var number1 = 2;
+function outerfunction() {
 
-var number2 = 5
-
-
-
-function add(a, b){
-
-var answer = a + b; //line 1
-
-return answer;
-
-}
-
-var sum = add(number1, number2); // line 2
-
-
-
-console.log(sum) //line 3
-
-
-
-console.log(answer) //line 4
+    console.log(a);
+    
+    var a = 10;
+    
+    
+    
+    innerfunction();
+    
+    
+    
+    function innerfunction() {
+    
+    console.log(a);
+    
+    console.log(window.a);
+    
+    console.log(this.a)
+    
+    }
+    
+    }
+    
+    
+    
+    var a = 7;
+    
+    var b =3
+    
+    
+    
+    outerfunction();
