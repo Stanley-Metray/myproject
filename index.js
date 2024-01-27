@@ -10,7 +10,7 @@ class user_details {
 document.getElementById("myForm").addEventListener("submit", (e) => {
     e.preventDefault();
     user = new user_details(document.getElementById("name").value, document.getElementById("email").value, document.getElementById("phone").value);
-    axios.post('https://crudcrud.com/api/7628dbbdbca14d36b306f25e149effc9/userAppointments', JSON.stringify(user), {
+    axios.post('https://crudcrud.com/api/b8c59779557248b1ab68fc0795163943/userAppointments', JSON.stringify(user), {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -22,7 +22,7 @@ document.getElementById("myForm").addEventListener("submit", (e) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.get('https://crudcrud.com/api/7628dbbdbca14d36b306f25e149effc9/userAppointments')
+    axios.get('https://crudcrud.com/api/b8c59779557248b1ab68fc0795163943/userAppointments')
         .then((res) => {
             const data = Array.from(res.data);
             const table = document.getElementById('table');
@@ -31,19 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.innerHTML = `<td>${value.name}</td>
             <td>${value.email}</td>
             <td>${value.phone}</td>
-            <td><button name='${value._id}'>Edit</button></td>
-            <td><button name='${value._id}'>Delete</button></td>
+            <td><button onclick='handleEdit(event)' name='${value._id}'>Edit</button></td>
+            <td><button onclick='handleDelete(event)' name='${value._id}'>Delete</button></td>
             `;
                 table.appendChild(row);
             });
         })
         .catch((err) => { console.log(err) });
-
-    let linkElement = document.createElement('link');
-    linkElement.setAttribute('href', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css');
-    linkElement.setAttribute('rel', 'stylesheet');
-    linkElement.setAttribute('integrity', 'sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC');
-    linkElement.setAttribute('crossorigin', 'anonymous');
-    document.head.appendChild(linkElement);
 });
 
+function handleDelete(event)
+{
+    const _id = event.target.name;
+    axios.delete(`https://crudcrud.com/api/b8c59779557248b1ab68fc0795163943/userAppointments/${_id}`)
+    .then((res)=> {
+        event.target.parentElement.parentElement.remove();
+        console.log(res);
+    })
+    .catch((err)=> console.log(err));
+}
