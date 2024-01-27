@@ -38,5 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch((err) => { console.log(err) });
+
+    let linkElement = document.createElement('link');
+    linkElement.setAttribute('href', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css');
+    linkElement.setAttribute('rel', 'stylesheet');
+    linkElement.setAttribute('integrity', 'sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC');
+    linkElement.setAttribute('crossorigin', 'anonymous');
+    document.head.appendChild(linkElement);
 });
 
