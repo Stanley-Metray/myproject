@@ -20,7 +20,16 @@ document.getElementById("myForm").addEventListener("submit", (e) => {
             }
         })
             .then((res) => {
-                console.log(res);
+                const data = res.data;
+                const table = document.getElementById('table');
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${data.name}</td>
+            <td>${data.email}</td>
+            <td>${data.phone}</td>
+            <td><button onclick='handleEdit(event)' name='${data._id}'>Edit</button></td>
+            <td><button onclick='handleDelete(event)' name='${data._id}'>Delete</button></td>
+            `;
+                table.appendChild(row);
             })
             .catch((err) => console.log(err));
     } else {
